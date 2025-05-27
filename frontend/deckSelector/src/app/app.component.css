@@ -1,0 +1,14 @@
+.side-by-side-container {
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  app-deck-list, app-complete-list {
+    display: inline-table;
+    width: 400px;
+  }
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #3b4cca;
+}

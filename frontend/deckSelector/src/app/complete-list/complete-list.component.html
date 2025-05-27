@@ -1,0 +1,11 @@
+<div class="list-wrapper">
+    <h2>{{ title }}</h2>
+    <ul *ngIf="items && items.length;">
+      <li *ngFor="let item of items">
+        {{item.identifier}}
+      </li>
+    </ul>
+    <ng-template #empty>
+      <p>No items to display.</p>
+    </ng-template>
+  </div>

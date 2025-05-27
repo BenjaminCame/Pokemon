@@ -1,0 +1,14 @@
+<div class="list-wrapper">
+  <input type="text" [(ngModel)]="title" placeholder="Enter new deck name" />
+  <button (click)="addDeck()" style="background-color: green;">Add Item</button>
+    <h2>List of your potential decks</h2>
+    <ul *ngIf="decks && decks.length;">
+      <li *ngFor="let deck of decks">
+        {{deck}}
+        <button (click)="onDeckSelected(deck)" style="background-color: aqua;">select</button>
+      </li>
+    </ul>
+    <ng-template #empty>
+      <p>No items to display.</p>
+    </ng-template>
+  </div>

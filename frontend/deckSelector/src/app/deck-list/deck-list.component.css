@@ -1,0 +1,28 @@
+.list-wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #ffde00;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  li:hover {
+    background-color: #f0f0f0;
+  }
+    .panel {
+      background-color: #fce4ec;
+      padding: 20px;
+      border: 1px solid #f48fb1;
+    }
