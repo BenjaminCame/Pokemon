@@ -1,11 +1,23 @@
 <div class="list-wrapper">
-  <input type="text" [(ngModel)]="title" placeholder="Enter new deck name" />
-  <button (click)="addDeck()" style="background-color: green;">Add Item</button>
-    <h2>List of your potential decks</h2>
-    <ul *ngIf="decks && decks.length;">
-      <li *ngFor="let deck of decks">
-        {{deck}}
-        <button (click)="generalService.selectDeck(deck)" style="background-color: aqua;">select</button>
+  <input type="text" [(ngModel)]="title" placeholder="Create deck" />
+  <button (click)="addDeck()" style="background-color: green;">Create</button>
+  <div *ngFor="let deck of decks">
+    <label>
+      <input
+        type="radio"
+        name="card"
+        [value]="deck"
+        (change)="onDeckSelected(deck)"
+        [(ngModel)]="selectedDeck"
+      />
+      {{ deck }}
+    </label>
+  </div>
+  <h2 *ngIf="selectedDeck">Your Selected Cards in "{{ selectedDeck }}" deck</h2>
+    <ul *ngIf="cards && cards.length;">
+      <li *ngFor="let card of cards">
+        {{card.identifier}}
+        <button (click)="removeCard(card.identifier)" style="background-color: aqua;">Remove</button>
       </li>
     </ul>
     <ng-template #empty>
