@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject} from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { GeneralService } from '../general.service';
 
 
 @Component({
@@ -15,7 +16,8 @@ import { Observable } from 'rxjs';
 export class DeckListComponent {
   @Input() title: string = '';
   decks: any[] = [];
-  @Output() deckSelected = new EventEmitter<string>();
+  generalService = inject(GeneralService);
+
   constructor(private http:HttpClient) {}
 
   ngOnInit() {
@@ -38,7 +40,4 @@ export class DeckListComponent {
     this.ngOnInit()
   }
 
-  onDeckSelected(deck: string) {
-    this.deckSelected.emit(deck);
-  }
 }

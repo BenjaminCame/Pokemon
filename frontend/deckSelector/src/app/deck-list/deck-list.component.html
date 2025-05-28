@@ -5,7 +5,7 @@
     <ul *ngIf="decks && decks.length;">
       <li *ngFor="let deck of decks">
         {{deck}}
-        <button (click)="onDeckSelected(deck)" style="background-color: aqua;">select</button>
+        <button (click)="generalService.selectDeck(deck)" style="background-color: aqua;">select</button>
       </li>
     </ul>
     <ng-template #empty>

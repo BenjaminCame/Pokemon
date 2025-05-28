@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Event } from '@angular/router';
+import { DeckListComponent } from './deck-list/deck-list.component';
+import { DeckCardsComponent } from './deck-cards/deck-cards.component';
 
 @Component({
     selector: 'app-root',
@@ -10,8 +12,4 @@ import { Event } from '@angular/router';
 export class AppComponent {
   title = 'deckSelector';
   selectedDeck: string = '';
-  onDeckSelected(deck: string) {
-    this.selectedDeck = deck;
-    console.log('Selected deck:', this.selectedDeck);
-  }
 }

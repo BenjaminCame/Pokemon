@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgFor,NgIf } from '@angular/common';
-import { Event } from '@angular/router';
+import { GeneralService } from '../general.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-deck-cards',
@@ -11,13 +12,28 @@ import { Event } from '@angular/router';
 })
 export class DeckCardsComponent {
   @Input() deckName: string = '';
-
+  private deckSubscription: Subscription = new Subscription();
   cards : any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private generalService: GeneralService) {}
+  
+  ngOnInit() {
+      this.deckSubscription = this.generalService.deckSelected$.subscribe(deckName => {
+      this.onDeckSelected(deckName);
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.deckSubscription) {
+      this.deckSubscription.unsubscribe();
+    }
+  }
+
   onDeckSelected(deckName: string) {
+    console.log("this is the deck selected it is woekinfg" + deckName);
     this.deckName = deckName;
-    this.http.get<any[]>(`http://127:0.0.1:5001/deck/${deckName}`).subscribe({
+    console.log("Deck name set to: " + this.deckName);
+    this.http.get<any[]>(`http://127.0.0.1:5001/deck/${deckName}`).subscribe({
       next: (data) => {
         this.cards = data;
         console.log('Cards fetched successfully:', this.cards);
