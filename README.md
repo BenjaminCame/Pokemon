@@ -20,3 +20,15 @@ Pokemon Deck Builder is an application that helps aspiring Pokémon trainers cre
    ```zsh
    docker-compose up --build
    ```
+
+##Known Bugs
+
+- all cards with the same identifier are removed from deck 
+
+
+##Potantial Updates
+
+- Using a relational schema for storing cards in deck instead of creating new tables
+- Using relational database schema to associate cards with decks
+- Remove deck option
+- View car details (potantially in the right panel)

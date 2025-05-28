@@ -51,10 +51,14 @@ export class DeckListComponent {
     );
   }
 
-  addDeck(){
+  addDeck() {
+    if (!this.isDeckNameValid(this.title)) {
+      alert('Deck name contains invalid characters. Only letters, numbers, spaces, underscores, and hyphens are allowed.');
+      return;
+    }
     this.http.post("http://127.0.0.1:5001/newdeck", { name: this.title })
-      .subscribe({})
-    this.ngOnInit()
+      .subscribe({});
+    this.ngOnInit();
   }
 
   removeCard(cardID: string) {
@@ -73,6 +77,11 @@ export class DeckListComponent {
         }
       }
     );
+  }
+
+  isDeckNameValid(deckName: string): boolean {
+    // Allow only letters, numbers, spaces, underscores, and hyphens
+    return /^[\w\- ]+$/.test(deckName);
   }
 
 }
