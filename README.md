@@ -21,12 +21,12 @@ Pokemon Deck Builder is an application that helps aspiring Pokémon trainers cre
    docker-compose up --build
    ```
 
-##Known Bugs
+## Known Bugs
 
 - All cards with the same identifier are removed from deck 
 
 
-##Potantial Updates
+## Potantial Updates
 
 - General UI improvments
 - Using a relational schema for storing cards in deck instead of creating new tables
