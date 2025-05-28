@@ -13,7 +13,7 @@ Pokemon Deck Builder is an application that helps aspiring Pokémon trainers cre
 1. **Clone the repository:**
    ```zsh
    git clone https://github.com/BenjaminCame/Pokemon.git
-   cd pokemon
+   cd Pokemon
    ```
 
 2. **Build and start the application:**
