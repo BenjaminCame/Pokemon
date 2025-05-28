@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
+import { GeneralService } from '../general.service';
 
 @Component({
   selector: 'app-complete-list',
@@ -12,8 +13,13 @@ import { HttpClient } from '@angular/common/http';
 export class CompleteListComponent {
   @Input() title: string = 'Complete Pokemon List';
   items: any[] = [];
-  constructor(private http: HttpClient) {}
+  selectedDeck: string = '';
+  constructor(private http: HttpClient, private generalService: GeneralService) {}
   ngOnInit() {
+    this.generalService.deckSelected$.subscribe(deckName => {
+      console.log("Deck selected in CompleteListComponent: " + deckName);
+      this.selectedDeck = deckName;
+    });
     this.http.get<any[]>("http://127.0.0.1:5001/cards")
       .subscribe({
         next: (data) => {
@@ -26,8 +32,22 @@ export class CompleteListComponent {
       }
     );
   }
-  
-  // onItemClick(item: T) {
-  //   this.itemClick.emit(item);
-  // }
+
+  insertCard(cardID: string) {
+    if (!this.selectedDeck) {
+      console.error('No deck selected!');
+      return;
+    }
+    console.log(`Inserting card with ID ${cardID} into deck ${this.selectedDeck}`)
+    this.http.post<any>(`http://127.0.0.1:5001/card/insert/${this.selectedDeck}`, { card_id: cardID })
+      .subscribe({
+        next: (data) => {
+          console.log('Card inserted successfully:', data);
+        },
+        error: (err) => {
+          console.error('Error inserting card:', err);
+        }
+      }
+    );
+  }
 }

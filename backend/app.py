@@ -152,9 +152,11 @@ def add_card_to_deck(deck_id):
 
 
 
-# remove card from deck TODO 
-@app.route('/card/remove/<string:deck_id>/<string:card_id>', methods=['DELETE'])
-def remove_card_from_deck(deck_id, card_id):
+# remove card from deck 
+@app.route('/card/remove/<string:deck_id>', methods=['DELETE'])
+def remove_card_from_deck(deck_id):
+    data = request.json
+    card_id = data.get('card_id')
     if not deck_id or not card_id:
         return jsonify({'error': 'Deck ID and Card ID are required'}), 400
 
