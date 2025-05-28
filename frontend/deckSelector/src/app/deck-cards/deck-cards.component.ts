@@ -32,7 +32,6 @@ export class DeckCardsComponent {
   onDeckSelected(deckName: string) {
     console.log("this is the deck selected it is woekinfg" + deckName);
     this.deckName = deckName;
-    console.log("Deck name set to: " + this.deckName);
     this.http.get<any[]>(`http://127.0.0.1:5001/deck/${deckName}`).subscribe({
       next: (data) => {
         this.cards = data;
