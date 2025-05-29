@@ -29,7 +29,8 @@ Pokemon Deck Builder is an application that helps aspiring Pokémon trainers cre
 ## Potantial Updates
 
 - General UI improvments
+- Calculate deck statistics
+- Add max deck option
 - Using a relational schema for storing cards in deck instead of creating new tables
-- Using relational database schema to associate cards with decks
 - Remove deck option
 - View card details (potantially in the right panel)
