@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Event } from '@angular/router';
 import { DeckListComponent } from './deck-list/deck-list.component';
-import { DeckCardsComponent } from './deck-cards/deck-cards.component';
+
 
 @Component({
     selector: 'app-root',

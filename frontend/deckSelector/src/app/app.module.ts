@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CompleteListComponent } from "./complete-list/complete-list.component";
 import { DeckListComponent } from "./deck-list/deck-list.component";
-import { DeckCardsComponent } from "./deck-cards/deck-cards.component";
+
 
 @NgModule({
   declarations: [
@@ -15,8 +15,7 @@ import { DeckCardsComponent } from "./deck-cards/deck-cards.component";
     BrowserModule,
     AppRoutingModule,
     CompleteListComponent,
-    DeckListComponent,
-    DeckCardsComponent
+    DeckListComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
