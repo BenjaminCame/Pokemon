@@ -2,8 +2,6 @@ import { Component, Input, Output, EventEmitter, inject} from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { GeneralService } from '../general.service';
 
 
@@ -23,6 +21,9 @@ export class DeckListComponent {
   constructor(private http:HttpClient) {}
 
   ngOnInit() {
+    this.generalService.decks$.subscribe(decks => this.decks = decks)
+    this.generalService.cards$.subscribe(cards => this.cards = cards)
+
     this.http.get<any[]>(`http://127.0.1:5001/decks`).subscribe({
       next: (data) => {
         this.decks = data;
@@ -57,8 +58,16 @@ export class DeckListComponent {
       return;
     }
     this.http.post("http://127.0.0.1:5001/newdeck", { name: this.title })
-      .subscribe({});
-    this.ngOnInit();
+      .subscribe({
+        next: (data) => {
+          console.log('Deck created successfully:', data);
+          this.generalService.refreshDecks(this.title);
+          this.title = ''; // Clear the input field after successful creation
+        },
+        error: (err) => {
+          console.error('Error creating deck:', err);
+        }
+      });
   }
 
   removeCard(cardID: string) {
@@ -71,6 +80,7 @@ export class DeckListComponent {
       .subscribe({
         next: (data) => {
           console.log('Card  successfully:', data);
+          this.generalService.refreshDecks()
         },
         error: (err) => {
           console.error('Error removing card:', err);

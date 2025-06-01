@@ -43,6 +43,7 @@ export class CompleteListComponent {
       .subscribe({
         next: (data) => {
           console.log('Card inserted successfully:', data);
+          this.generalService.refreshDecks(this.selectedDeck);
         },
         error: (err) => {
           console.error('Error inserting card:', err);
