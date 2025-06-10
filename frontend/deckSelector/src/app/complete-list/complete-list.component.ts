@@ -39,7 +39,7 @@ export class CompleteListComponent {
       return;
     }
     console.log(`Inserting card with ID ${cardID} into deck ${this.selectedDeck}`)
-    this.http.post<any>(`http://127.0.0.1:5001/card/insert/${this.selectedDeck}`, { card_id: cardID })
+    this.http.post<any>(`http://127.0.0.1:5001/insert`, { card_id: cardID, deck_id : this.selectedDeck })
       .subscribe({
         next: (data) => {
           console.log('Card inserted successfully:', data);

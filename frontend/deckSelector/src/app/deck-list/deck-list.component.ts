@@ -57,7 +57,7 @@ export class DeckListComponent {
       alert('Deck name contains invalid characters. Only letters, numbers, spaces, underscores, and hyphens are allowed.');
       return;
     }
-    this.http.post("http://127.0.0.1:5001/newdeck", { name: this.title })
+    this.http.post("http://127.0.0.1:5001/create", { name: this.title })
       .subscribe({
         next: (data) => {
           console.log('Deck created successfully:', data);
@@ -76,7 +76,7 @@ export class DeckListComponent {
       return;
     }
     console.log(`Removing card with ID ${cardID} into deck ${this.selectedDeck}`)
-    this.http.delete<any>(`http://127.0.0.1:5001/card/remove/${this.selectedDeck}`, {body: { card_id: cardID }})
+    this.http.delete<any>(`http://127.0.0.1:5001/${this.selectedDeck}/${cardID}`)
       .subscribe({
         next: (data) => {
           console.log('Card  successfully:', data);
