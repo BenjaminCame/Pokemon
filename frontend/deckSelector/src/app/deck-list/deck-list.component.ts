@@ -80,7 +80,7 @@ export class DeckListComponent {
       .subscribe({
         next: (data) => {
           console.log('Card  successfully:', data);
-          this.generalService.refreshDecks()
+          this.generalService.refreshDecks(this.selectedDeck)
         },
         error: (err) => {
           console.error('Error removing card:', err);
