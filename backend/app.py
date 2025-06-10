@@ -59,7 +59,7 @@ def get_deck(deck_id):
     return jsonify([dict(card) for card in cards])
 
 # create a new deck
-@app.route('/newdeck', methods=['POST'])
+@app.route('/create', methods=['POST'])
 def create_deck():
     data = request.json
     deck_name = data.get('name')
@@ -120,12 +120,13 @@ def create_deck():
     return jsonify({'message': 'Deck created successfully'}), 201
 
 # select card to put into deck
-@app.route('/card/insert/<string:deck_id>', methods=['POST'])
-def add_card_to_deck(deck_id):
+@app.route('/insert', methods=['POST'])
+def add_card_to_deck():
     data = request.json
+    deck_id = data.get('deck_id')
     card_id = data.get('card_id')
-    if not card_id:
-        return jsonify({'error': 'Card ID is required'}), 400
+    if not card_id or not deck_id:
+        return jsonify({'error': 'Card ID or Deck ID is missing'}), 400
     print(card_id)
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -153,10 +154,9 @@ def add_card_to_deck(deck_id):
 
 
 # remove card from deck 
-@app.route('/card/remove/<string:deck_id>', methods=['DELETE'])
-def remove_card_from_deck(deck_id):
-    data = request.json
-    card_id = data.get('card_id')
+@app.route('/<string:deck_id>/<string:card_id>', methods=['DELETE'])
+def remove_card_from_deck(deck_id, card_id):
+
     if not deck_id or not card_id:
         return jsonify({'error': 'Deck ID and Card ID are required'}), 400
 
@@ -186,4 +186,4 @@ def remove_card_from_deck(deck_id):
 init_db()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)
